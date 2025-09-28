@@ -1,6 +1,12 @@
 const express = require('express');
+require('dotenv').config();
+
 const ideasRouter = require('./routes/ideas');
-const PORT = 8080;
+
+const PORT = process.env.PORT || 8080;
+const connectDB = require('./config/db');
+
+connectDB();
 
 const app = express();
 
