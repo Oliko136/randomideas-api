@@ -26,7 +26,7 @@ const ideas = [
 ];
 
 // Get all ideas
-router.get('/', (req, res) => {
+router.get('/', (_, res) => {
     res.json({ success: true, data: ideas });
 })
 
@@ -41,6 +41,21 @@ router.get('/:id', (req, res) => {
     } else {
         res.json({ success: true, data: idea });
     }
+})
+
+// Add an idea
+router.post('/', (req, res) => {
+    const idea = {
+        id: ideas.length + 1,
+        text: req.body.text,
+        tag: req.body.tag,
+        username: req.body.username,
+        date: new Date().toISOString().slice(0, 10)
+    };
+    
+    ideas.push(idea);
+    
+    res.status(201).json({ success: true, data: idea });
 })
 
 module.exports = router;
