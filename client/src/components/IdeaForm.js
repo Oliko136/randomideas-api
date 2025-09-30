@@ -22,6 +22,9 @@ class IdeaForm {
       alert('Please enter all fields');
       return;
     }
+
+    // Save user to local storage
+    localStorage.setItem('username', usernameValue);
     
     const idea = {
       text: textValue,
@@ -45,7 +48,7 @@ class IdeaForm {
     usernameValue = '';
 
     this.render();
-    
+
     // Close modal
     document.dispatchEvent(new Event('closemodal'));
   }
@@ -55,7 +58,7 @@ class IdeaForm {
     <form id="idea-form">
       <div class="form-control">
         <label for="idea-text">Enter a Username</label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" value="${localStorage.getItem('username') ? localStorage.getItem('username') : ''}"/>
       </div>
       <div class="form-control">
         <label for="idea-text">What's Your Idea?</label>
