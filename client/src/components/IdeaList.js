@@ -15,6 +15,11 @@ class IdeaList {
         this._validTags.add('inventions');
     }
 
+    addIdeaToList(idea) {
+        this._ideas.push(idea);
+        this.render();
+    }
+
     async getIdeas() {
         try {
             const res = await IdeasApi.getIdeas();
