@@ -4,7 +4,10 @@
   "description": "Idea sharing app",
   "main": "server.js",
   "scripts": {
-    "start": "node --watch server.js"
+    "start": "node --watch server.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "build": "npm run install-client && npm run build-client"
   },
   "author": "Olha Sliusarenko <olchick136@gmail.com>",
   "license": "ISC",
