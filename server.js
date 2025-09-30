@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const ideasRouter = require('./routes/ideas');
@@ -14,8 +15,15 @@ const app = express();
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// CORS middleware
+app.use(cors({
+    origin: ['http://localhost:8080', 'http://localhost:3000'],
+    credentials: true
+}));
 
 app.get('/', (_, res) => {
     res.json({ message: 'Welcome to the RandomIdeas API' });
