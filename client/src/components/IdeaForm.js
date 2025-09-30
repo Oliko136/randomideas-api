@@ -21,11 +21,14 @@ class IdeaForm {
     };
 
     // Add idea to server
-    const newIdea = await IdeasApi.createIdea(idea);
-
-    // Add idea to list
-    this._ideaList.addIdeaToList(newIdea.data.data);
-
+    try {
+      const newIdea = await IdeasApi.createIdea(idea);
+      // Add idea to list
+      this._ideaList.addIdeaToList(newIdea.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  
     // Clear fields
     this._form.elements.text.value = '';
     this._form.elements.tag.value = '';
