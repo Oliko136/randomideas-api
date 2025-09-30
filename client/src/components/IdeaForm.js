@@ -13,27 +13,40 @@ class IdeaForm {
 
   async onSubmit(e) {
     e.preventDefault();
+
+    let textValue = this._form.elements.text.value;
+    let tagValue = this._form.elements.tag.value;
+    let usernameValue = this._form.elements.username.value;
+
+    if (!textValue || !tagValue || !usernameValue) {
+      alert('Please enter all fields');
+      return;
+    }
     
     const idea = {
-      text: this._form.elements.text.value,
-      tag: this._form.elements.tag.value,
-      username: this._form.elements.username.value
+      text: textValue,
+      tag: tagValue,
+      username: usernameValue
     };
 
-    // Add idea to server
     try {
+      // Add idea to server
       const newIdea = await IdeasApi.createIdea(idea);
+
       // Add idea to list
       this._ideaList.addIdeaToList(newIdea.data.data);
     } catch (error) {
       console.log(error);
     }
-  
+    
     // Clear fields
-    this._form.elements.text.value = '';
-    this._form.elements.tag.value = '';
-    this._form.elements.username.value = '';
+    textValue = '';
+    tagValue = '';
+    usernameValue = '';
 
+    this.render();
+    
+    // Close modal
     document.dispatchEvent(new Event('closemodal'));
   }
   
